@@ -27,7 +27,7 @@ function TimePickerContent({
   mode,
   title,
   subtitle,
-  accentColor = '#9EFF00',
+  accentColor = '#34D399',
   value,
   min = mode === 'count' ? 1 : 0,
   max = mode === 'count' ? 99 : 3600,
@@ -76,24 +76,30 @@ function TimePickerContent({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 backdrop-blur-sm sm:items-center"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm sm:items-center"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label={title}
     >
       <div
-        className="w-full max-w-md rounded-t-3xl border border-white/10 bg-[#141414] px-5 pt-4 pb-6 shadow-2xl sm:rounded-3xl"
+        className="w-full max-w-md rounded-t-3xl border border-white/[0.08] bg-[#121215] px-5 pt-3.5 pb-6 sm:rounded-3xl"
         style={{ paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-white/15 sm:hidden" />
+        <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-white/15 sm:hidden" />
 
         <div className="mb-5 flex items-start justify-between gap-3">
           <div>
-            <h3 className="font-display text-2xl font-bold tracking-wide uppercase text-white">
-              {title}
-            </h3>
+            <div className="flex items-center gap-2">
+              <span
+                className="h-2 w-2 rounded-full"
+                style={{ backgroundColor: accentColor }}
+              />
+              <h3 className="font-display text-lg font-semibold tracking-tight text-[#FAFAFA]">
+                {title}
+              </h3>
+            </div>
             {subtitle && (
               <p className="mt-0.5 text-xs text-zinc-400">{subtitle}</p>
             )}
@@ -101,30 +107,29 @@ function TimePickerContent({
           <button
             type="button"
             onClick={onClose}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-white/8 text-zinc-300 active:scale-95"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] bg-[#18181B] text-zinc-400 transition hover:text-white active:scale-95"
             aria-label="Cerrar"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
           </button>
         </div>
 
         {/* Display / Direct Input */}
         {mode === 'time' ? (
-          <div className="mb-5 flex flex-col items-center rounded-2xl border border-white/8 bg-[#0A0A0A] py-4">
-            <div className="flex items-center justify-center gap-1">
+          <div className="mb-5 flex flex-col items-center rounded-2xl border border-white/[0.08] bg-[#09090B] py-5">
+            <div className="flex items-center justify-center gap-1.5">
               <input
                 type="text"
                 inputMode="numeric"
                 value={minText}
                 onChange={(e) => handleMinChange(e.target.value)}
-                onBlur={() => setMinText(String(Math.floor(draft / 60)).padStart(2, '0'))}
+                onBlur={() =>
+                  setMinText(String(Math.floor(draft / 60)).padStart(2, '0'))
+                }
                 aria-label="Minutos"
-                className="font-display tabular-nums w-24 rounded-xl bg-white/5 py-1 text-center text-6xl font-extrabold tracking-tight text-white outline-none focus:ring-2 focus:ring-white/30"
+                className="font-display tabular-nums w-24 rounded-xl bg-white/[0.04] py-1.5 text-center text-5xl font-semibold tracking-tight text-[#FAFAFA] outline-none focus:ring-1 focus:ring-white/25"
               />
-              <span
-                className="font-display text-6xl font-extrabold"
-                style={{ color: accentColor }}
-              >
+              <span className="font-display text-4xl font-semibold text-zinc-500">
                 :
               </span>
               <input
@@ -132,21 +137,20 @@ function TimePickerContent({
                 inputMode="numeric"
                 value={secText}
                 onChange={(e) => handleSecChange(e.target.value)}
-                onBlur={() => setSecText(String(draft % 60).padStart(2, '0'))}
+                onBlur={() =>
+                  setSecText(String(draft % 60).padStart(2, '0'))
+                }
                 aria-label="Segundos"
-                className="font-display tabular-nums w-24 rounded-xl bg-white/5 py-1 text-center text-6xl font-extrabold tracking-tight text-white outline-none focus:ring-2 focus:ring-white/30"
+                className="font-display tabular-nums w-24 rounded-xl bg-white/[0.04] py-1.5 text-center text-5xl font-semibold tracking-tight text-[#FAFAFA] outline-none focus:ring-1 focus:ring-white/25"
               />
             </div>
-            <span className="mt-1.5 text-[11px] font-medium tracking-widest uppercase text-zinc-500">
-              MM : SS · {formatTime(draft)}
+            <span className="mt-2 text-[11px] font-medium tracking-wide text-zinc-500">
+              mm : ss · {formatTime(draft)}
             </span>
           </div>
         ) : (
-          <div className="mb-5 flex flex-col items-center rounded-2xl border border-white/8 bg-[#0A0A0A] py-5">
-            <span
-              className="font-display tabular-nums text-7xl font-extrabold leading-none"
-              style={{ color: accentColor }}
-            >
+          <div className="mb-5 flex flex-col items-center rounded-2xl border border-white/[0.08] bg-[#09090B] py-6">
+            <span className="font-display tabular-nums text-6xl font-semibold leading-none tracking-tight text-[#FAFAFA]">
               {draft}
             </span>
           </div>
@@ -154,13 +158,13 @@ function TimePickerContent({
 
         {/* Quick Delta Buttons */}
         {mode === 'time' ? (
-          <div className="mb-4 grid grid-cols-6 gap-2">
+          <div className="mb-4 grid grid-cols-6 gap-1.5">
             {[-10, -5, -1, 1, 5, 10].map((delta) => (
               <button
                 key={delta}
                 type="button"
                 onClick={() => updateDraft(draft + delta)}
-                className="tabular-nums flex h-12 items-center justify-center rounded-xl border border-white/10 bg-[#1C1C1E] text-sm font-bold text-white transition active:scale-95 active:bg-white/15"
+                className="tabular-nums flex h-11 items-center justify-center rounded-xl border border-white/[0.08] bg-[#18181B] text-xs font-medium text-zinc-200 transition hover:bg-white/[0.08] active:scale-95"
               >
                 {delta > 0 ? `+${delta}s` : `${delta}s`}
               </button>
@@ -173,7 +177,7 @@ function TimePickerContent({
                 key={delta}
                 type="button"
                 onClick={() => updateDraft(draft + delta)}
-                className="tabular-nums flex h-12 items-center justify-center rounded-xl border border-white/10 bg-[#1C1C1E] text-base font-bold text-white transition active:scale-95 active:bg-white/15"
+                className="tabular-nums flex h-11 items-center justify-center rounded-xl border border-white/[0.08] bg-[#18181B] text-sm font-medium text-zinc-200 transition hover:bg-white/[0.08] active:scale-95"
               >
                 {delta > 0 ? `+${delta}` : `${delta}`}
               </button>
@@ -183,21 +187,21 @@ function TimePickerContent({
 
         {/* Quick Presets */}
         <div className="mb-6">
-          <div className="mb-2 text-[11px] font-semibold tracking-wider uppercase text-zinc-500">
-            Presets rápidos
+          <div className="mb-2 text-xs font-medium text-zinc-500">
+            Valores rápidos
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {mode === 'time' && min === 0 && (
               <button
                 type="button"
                 onClick={() => updateDraft(0)}
-                className={`tabular-nums rounded-xl px-3.5 py-2 text-sm font-bold transition active:scale-95 ${
+                className={`tabular-nums rounded-xl border px-3 py-2 text-xs font-medium transition active:scale-95 ${
                   draft === 0
-                    ? 'bg-white text-black'
-                    : 'border border-white/10 bg-[#1C1C1E] text-zinc-300'
+                    ? 'border-white/25 bg-[#FAFAFA] text-[#09090B]'
+                    : 'border-white/[0.08] bg-[#18181B] text-zinc-300'
                 }`}
               >
-                OFF
+                Desactivado
               </button>
             )}
             {(mode === 'time' ? TIME_PRESETS : COUNT_PRESETS).map((preset) => {
@@ -207,12 +211,11 @@ function TimePickerContent({
                   key={preset}
                   type="button"
                   onClick={() => updateDraft(preset)}
-                  className={`tabular-nums rounded-xl px-3.5 py-2 text-sm font-bold transition active:scale-95 ${
+                  className={`tabular-nums rounded-xl border px-3 py-2 text-xs font-medium transition active:scale-95 ${
                     active
-                      ? 'text-black'
-                      : 'border border-white/10 bg-[#1C1C1E] text-zinc-200'
+                      ? 'border-white/25 bg-[#FAFAFA] text-[#09090B]'
+                      : 'border-white/[0.08] bg-[#18181B] text-zinc-300'
                   }`}
-                  style={active ? { backgroundColor: accentColor } : undefined}
                 >
                   {mode === 'time' ? `${preset}s` : preset}
                 </button>
@@ -225,10 +228,9 @@ function TimePickerContent({
         <button
           type="button"
           onClick={handleConfirm}
-          className="flex h-14 w-full items-center justify-center gap-2 rounded-2xl font-display text-xl font-extrabold tracking-wider uppercase text-black transition active:scale-[0.98]"
-          style={{ backgroundColor: accentColor }}
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FAFAFA] text-sm font-semibold text-[#09090B] transition hover:bg-zinc-200 active:scale-[0.98]"
         >
-          <Check className="h-6 w-6 stroke-[2.5]" />
+          <Check className="h-4 w-4 stroke-[2.25]" />
           Confirmar
         </button>
       </div>

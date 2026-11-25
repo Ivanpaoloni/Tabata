@@ -35,26 +35,26 @@ export function createPresetWorkouts(): Workout[] {
   return [
     {
       id: 'preset-tabata-clasico',
-      name: 'TABATA CLÁSICO',
+      name: 'Tabata Clásico',
       color: PHASE_COLORS.work,
       prepareSeconds: 5,
       rounds: [
         {
           id: 'preset-r1',
-          name: 'ROUND 1',
+          name: 'Ronda 1',
           repeats: 8,
           intervals: [
             {
               id: 'preset-r1-work',
               type: 'work',
-              label: 'WORK',
+              label: 'Trabajo',
               durationSeconds: 20,
               color: PHASE_COLORS.work,
             },
             {
               id: 'preset-r1-rest',
               type: 'rest',
-              label: 'REST',
+              label: 'Descanso',
               durationSeconds: 10,
               color: PHASE_COLORS.rest,
             },
@@ -69,26 +69,26 @@ export function createPresetWorkouts(): Workout[] {
     },
     {
       id: 'preset-hiit-30-10',
-      name: 'HIIT 30/10 CIRCUITO',
-      color: PHASE_COLORS.rest_between_cycles,
+      name: 'HIIT 30/10 Circuito',
+      color: '#FBBF24',
       prepareSeconds: 5,
       rounds: [
         {
           id: 'preset-hiit-r1',
-          name: 'ROUND 1',
+          name: 'Ronda 1',
           repeats: 4,
           intervals: [
             {
               id: 'preset-hiit-work',
               type: 'work',
-              label: 'WORK',
+              label: 'Trabajo',
               durationSeconds: 30,
               color: PHASE_COLORS.work,
             },
             {
               id: 'preset-hiit-rest',
               type: 'rest',
-              label: 'REST',
+              label: 'Descanso',
               durationSeconds: 10,
               color: PHASE_COLORS.rest,
             },
@@ -103,19 +103,19 @@ export function createPresetWorkouts(): Workout[] {
     },
     {
       id: 'preset-emom-10',
-      name: 'EMOM 10 MIN',
+      name: 'EMOM 10 min',
       color: PHASE_COLORS.custom,
       prepareSeconds: 10,
       rounds: [
         {
           id: 'preset-emom-r1',
-          name: 'ROUND 1',
+          name: 'Ronda 1',
           repeats: 10,
           intervals: [
             {
               id: 'preset-emom-work',
               type: 'work',
-              label: 'WORK',
+              label: 'Trabajo',
               durationSeconds: 60,
               color: PHASE_COLORS.work,
             },
@@ -136,6 +136,21 @@ function clampInt(val: unknown, min: number, max: number, fallback: number): num
   return Math.min(max, Math.max(min, Math.floor(val)));
 }
 
+function normalizeSoberColor(hex: unknown, fallback: string): string {
+  if (typeof hex !== 'string' || !/^#[0-9a-fA-F]{6}$/.test(hex)) return fallback;
+  const legacyMap: Record<string, string> = {
+    '#9EFF00': '#34D399',
+    '#84CC16': '#34D399',
+    '#FF453A': '#F87171',
+    '#EF4444': '#F87171',
+    '#FACC15': '#FBBF24',
+    '#F97316': '#FB923C',
+    '#0EA5E9': '#60A5FA',
+    '#3B82F6': '#60A5FA',
+  };
+  return legacyMap[hex.toUpperCase()] ?? hex;
+}
+
 function sanitizeInterval(raw: unknown): Interval | null {
   if (!raw || typeof raw !== 'object') return null;
   const obj = raw as Record<string, unknown>;
@@ -150,12 +165,13 @@ function sanitizeInterval(raw: unknown): Interval | null {
     label:
       typeof obj.label === 'string' && obj.label.trim()
         ? obj.label.trim()
-        : type.toUpperCase(),
+        : type === 'work'
+          ? 'Trabajo'
+          : type === 'rest'
+            ? 'Descanso'
+            : 'Ejercicio',
     durationSeconds: clampInt(obj.durationSeconds, 1, 3600, 20),
-    color:
-      typeof obj.color === 'string' && /^#[0-9a-fA-F]{6}$/.test(obj.color)
-        ? obj.color
-        : PHASE_COLORS[type],
+    color: normalizeSoberColor(obj.color, PHASE_COLORS[type]),
   };
 }
 
@@ -174,7 +190,7 @@ function sanitizeRound(raw: unknown, index: number): Round | null {
     name:
       typeof obj.name === 'string' && obj.name.trim()
         ? obj.name.trim()
-        : `ROUND ${index + 1}`,
+        : `Ronda ${index + 1}`,
     repeats: clampInt(obj.repeats, 1, 99, 1),
     intervals,
   };
@@ -196,11 +212,8 @@ export function sanitizeWorkout(raw: unknown): Workout | null {
     name:
       typeof obj.name === 'string' && obj.name.trim()
         ? obj.name.trim()
-        : 'MY TABATA',
-    color:
-      typeof obj.color === 'string' && /^#[0-9a-fA-F]{6}$/.test(obj.color)
-        ? obj.color
-        : PHASE_COLORS.work,
+        : 'Mi Tabata',
+    color: normalizeSoberColor(obj.color, PHASE_COLORS.work),
     prepareSeconds: clampInt(obj.prepareSeconds, 0, 300, 5),
     rounds,
     cycles: clampInt(obj.cycles, 1, 99, 1),
@@ -220,10 +233,7 @@ function sanitizeHistoryEntry(raw: unknown): WorkoutHistoryEntry | null {
     id: typeof obj.id === 'string' && obj.id ? obj.id : generateId(),
     workoutId: typeof obj.workoutId === 'string' ? obj.workoutId : 'unknown',
     workoutName: obj.workoutName,
-    workoutColor:
-      typeof obj.workoutColor === 'string' && /^#[0-9a-fA-F]{6}$/.test(obj.workoutColor)
-        ? obj.workoutColor
-        : PHASE_COLORS.work,
+    workoutColor: normalizeSoberColor(obj.workoutColor, PHASE_COLORS.work),
     completedAt:
       typeof obj.completedAt === 'string'
         ? obj.completedAt

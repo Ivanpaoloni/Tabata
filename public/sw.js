@@ -1,11 +1,12 @@
-const CACHE_NAME = 'tabata-pro-cache-v1';
+const CACHE_NAME = 'tabata-cache-v2';
 const APP_SHELL = [
   '/',
   '/index.html',
   '/manifest.webmanifest',
-  '/icons/icon.svg',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
+  '/icon.svg',
+  '/pwa-192x192.png',
+  '/pwa-512x512.png',
+  '/apple-touch-icon.png',
 ];
 
 self.addEventListener('install', (event) => {
@@ -34,7 +35,6 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
-  // Navigation requests: network-first with offline fallback to cached index.html
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
@@ -48,7 +48,6 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets & Google Fonts: stale-while-revalidate
   if (
     url.origin === self.location.origin ||
     url.hostname === 'fonts.googleapis.com' ||

@@ -97,23 +97,68 @@ export interface PersistedAppData {
   quickTabata: QuickTabataConfig;
 }
 
+export interface PhaseTheme {
+  bg: string;
+  accent: string;
+  surface: string;
+  border: string;
+}
+
+export const PHASE_THEMES: Record<PhaseType, PhaseTheme> = {
+  prepare: {
+    bg: '#16130B',
+    accent: '#FBBF24',
+    surface: 'rgba(251, 191, 36, 0.08)',
+    border: 'rgba(251, 191, 36, 0.2)',
+  },
+  work: {
+    bg: '#0B1612',
+    accent: '#34D399',
+    surface: 'rgba(52, 211, 153, 0.08)',
+    border: 'rgba(52, 211, 153, 0.2)',
+  },
+  rest: {
+    bg: '#180E10',
+    accent: '#F87171',
+    surface: 'rgba(248, 113, 113, 0.08)',
+    border: 'rgba(248, 113, 113, 0.2)',
+  },
+  custom: {
+    bg: '#0C131C',
+    accent: '#60A5FA',
+    surface: 'rgba(96, 165, 250, 0.08)',
+    border: 'rgba(96, 165, 250, 0.2)',
+  },
+  rest_between_cycles: {
+    bg: '#0C131C',
+    accent: '#60A5FA',
+    surface: 'rgba(96, 165, 250, 0.08)',
+    border: 'rgba(96, 165, 250, 0.2)',
+  },
+  cooldown: {
+    bg: '#0C131C',
+    accent: '#60A5FA',
+    surface: 'rgba(96, 165, 250, 0.08)',
+    border: 'rgba(96, 165, 250, 0.2)',
+  },
+};
+
 export const PHASE_COLORS: Record<PhaseType, string> = {
-  prepare: '#FACC15',
-  work: '#9EFF00',
-  rest: '#FF453A',
-  custom: '#0EA5E9',
-  rest_between_cycles: '#F97316',
-  cooldown: '#3B82F6',
+  prepare: PHASE_THEMES.prepare.accent,
+  work: PHASE_THEMES.work.accent,
+  rest: PHASE_THEMES.rest.accent,
+  custom: PHASE_THEMES.custom.accent,
+  rest_between_cycles: PHASE_THEMES.rest_between_cycles.accent,
+  cooldown: PHASE_THEMES.cooldown.accent,
 };
 
 export const WORKOUT_PALETTE: string[] = [
-  '#9EFF00',
-  '#FACC15',
-  '#FF453A',
-  '#F97316',
-  '#0EA5E9',
-  '#3B82F6',
-  '#A855F7',
-  '#EC4899',
-  '#14B8A6',
+  '#34D399', // Esmeralda suave
+  '#60A5FA', // Celeste pizarra
+  '#FBBF24', // Ámbar apagado
+  '#F87171', // Terracota / coral suave
+  '#A78BFA', // Lavanda sobria
+  '#38BDF8', // Azul hielo
+  '#FB923C', // Cobre suave
+  '#94A3B8', // Gris acero
 ];

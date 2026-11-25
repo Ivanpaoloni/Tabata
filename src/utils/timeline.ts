@@ -25,7 +25,7 @@ export function flattenWorkoutToTimeline(workout: Workout): TimelineStep[] {
     const firstRound = rounds[0];
     rawSteps.push({
       phase: 'prepare',
-      label: 'PREPARE',
+      label: 'Preparación',
       color: PHASE_COLORS.prepare,
       durationSeconds: Math.floor(workout.prepareSeconds),
       cycleIndex: 1,
@@ -33,7 +33,7 @@ export function flattenWorkoutToTimeline(workout: Workout): TimelineStep[] {
       cyclesLeft: totalCycles,
       roundIndex: totalRounds > 0 ? 1 : 0,
       totalRounds,
-      roundName: firstRound?.name?.trim() || 'ROUND 1',
+      roundName: firstRound?.name?.trim() || 'Ronda 1',
       repeatIndex: 1,
       totalRepeats: firstRound ? Math.max(1, Math.floor(firstRound.repeats)) : 1,
       repeatsLeft: firstRound ? Math.max(1, Math.floor(firstRound.repeats)) : 0,
@@ -44,7 +44,7 @@ export function flattenWorkoutToTimeline(workout: Workout): TimelineStep[] {
     for (let rIdx = 0; rIdx < rounds.length; rIdx++) {
       const round = rounds[rIdx];
       const totalRepeats = Math.max(1, Math.floor(round.repeats || 1));
-      const roundName = round.name?.trim() || `ROUND ${rIdx + 1}`;
+      const roundName = round.name?.trim() || `Ronda ${rIdx + 1}`;
 
       for (let rep = 1; rep <= totalRepeats; rep++) {
         for (const interval of round.intervals) {
@@ -53,15 +53,15 @@ export function flattenWorkoutToTimeline(workout: Workout): TimelineStep[] {
 
           const fallbackLabel =
             interval.type === 'work'
-              ? 'WORK'
+              ? 'Trabajo'
               : interval.type === 'rest'
-                ? 'REST'
-                : 'CUSTOM';
+                ? 'Descanso'
+                : 'Ejercicio';
 
           rawSteps.push({
             phase: interval.type,
-            label: interval.label.trim().toUpperCase() || fallbackLabel,
-            color: interval.color || PHASE_COLORS[interval.type],
+            label: interval.label.trim() || fallbackLabel,
+            color: PHASE_COLORS[interval.type],
             durationSeconds: duration,
             cycleIndex: c,
             totalCycles,
@@ -80,7 +80,7 @@ export function flattenWorkoutToTimeline(workout: Workout): TimelineStep[] {
     if (c < totalCycles && workout.restBetweenCyclesSeconds > 0) {
       rawSteps.push({
         phase: 'rest_between_cycles',
-        label: 'CYCLE REST',
+        label: 'Descanso entre ciclos',
         color: PHASE_COLORS.rest_between_cycles,
         durationSeconds: Math.floor(workout.restBetweenCyclesSeconds),
         cycleIndex: c,
@@ -88,7 +88,7 @@ export function flattenWorkoutToTimeline(workout: Workout): TimelineStep[] {
         cyclesLeft: totalCycles - c,
         roundIndex: totalRounds,
         totalRounds,
-        roundName: 'CYCLE REST',
+        roundName: 'Descanso entre ciclos',
         repeatIndex: 0,
         totalRepeats: 0,
         repeatsLeft: 0,
@@ -99,7 +99,7 @@ export function flattenWorkoutToTimeline(workout: Workout): TimelineStep[] {
   if (workout.cooldownSeconds > 0) {
     rawSteps.push({
       phase: 'cooldown',
-      label: 'COOLDOWN',
+      label: 'Enfriamiento',
       color: PHASE_COLORS.cooldown,
       durationSeconds: Math.floor(workout.cooldownSeconds),
       cycleIndex: totalCycles,
@@ -107,7 +107,7 @@ export function flattenWorkoutToTimeline(workout: Workout): TimelineStep[] {
       cyclesLeft: 0,
       roundIndex: totalRounds,
       totalRounds,
-      roundName: 'COOLDOWN',
+      roundName: 'Enfriamiento',
       repeatIndex: 0,
       totalRepeats: 0,
       repeatsLeft: 0,
@@ -156,11 +156,11 @@ export function formatTime(totalSeconds: number): string {
 export function formatCompactTime(totalSeconds: number): string {
   const clamped = Math.max(0, Math.floor(totalSeconds));
   if (clamped < 60) {
-    return `:${String(clamped).padStart(2, '0')}`;
+    return `00:${String(clamped).padStart(2, '0')}`;
   }
   const minutes = Math.floor(clamped / 60);
   const seconds = clamped % 60;
-  return `${minutes}:${String(seconds).padStart(2, '0')}`;
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
 export function formatWorkoutSummary(workout: Workout): string {
@@ -169,16 +169,16 @@ export function formatWorkoutSummary(workout: Workout): string {
     parts.push(`${workout.cycles} ciclos`);
   }
   if (workout.rounds.length > 1) {
-    parts.push(`${workout.rounds.length} rounds`);
+    parts.push(`${workout.rounds.length} rondas`);
   } else if (workout.rounds.length === 1) {
     const r = workout.rounds[0];
     parts.push(`${r.repeats} reps`);
     const work = r.intervals.find((i) => i.type === 'work');
     const rest = r.intervals.find((i) => i.type === 'rest');
     if (work && rest) {
-      parts.push(`${work.durationSeconds}s/${rest.durationSeconds}s`);
+      parts.push(`${work.durationSeconds}s / ${rest.durationSeconds}s`);
     } else if (work) {
-      parts.push(`${work.durationSeconds}s work`);
+      parts.push(`${work.durationSeconds}s`);
     } else if (r.intervals.length > 0) {
       parts.push(`${r.intervals.length} intervalos`);
     }
@@ -192,7 +192,7 @@ export function buildQuickTabataWorkout(config: QuickTabataConfig): Workout {
     {
       id: 'quick-work',
       type: 'work',
-      label: 'WORK',
+      label: 'Trabajo',
       durationSeconds: Math.max(1, config.workSeconds),
       color: PHASE_COLORS.work,
     },
@@ -201,7 +201,7 @@ export function buildQuickTabataWorkout(config: QuickTabataConfig): Workout {
     intervals.push({
       id: 'quick-rest',
       type: 'rest',
-      label: 'REST',
+      label: 'Descanso',
       durationSeconds: config.restSeconds,
       color: PHASE_COLORS.rest,
     });
@@ -209,13 +209,13 @@ export function buildQuickTabataWorkout(config: QuickTabataConfig): Workout {
 
   return {
     id: 'quick-tabata',
-    name: 'QUICK TABATA',
+    name: 'Tabata rápido',
     color: PHASE_COLORS.work,
     prepareSeconds: Math.max(0, config.prepareSeconds),
     rounds: [
       {
         id: 'quick-round-1',
-        name: 'ROUND 1',
+        name: 'Ronda 1',
         repeats: Math.max(1, config.repeats),
         intervals,
       },
@@ -226,23 +226,4 @@ export function buildQuickTabataWorkout(config: QuickTabataConfig): Workout {
     createdAt: now,
     updatedAt: now,
   };
-}
-
-/**
- * Computes high-contrast foreground color (#0A0A0A or #FFFFFF) for any hex background.
- */
-export function getContrastTextColor(hexColor: string): '#0A0A0A' | '#FFFFFF' {
-  const hex = hexColor.replace('#', '');
-  if (hex.length !== 6) return '#FFFFFF';
-  const r = parseInt(hex.slice(0, 2), 16) / 255;
-  const g = parseInt(hex.slice(2, 4), 16) / 255;
-  const b = parseInt(hex.slice(4, 6), 16) / 255;
-
-  const toLinear = (c: number) =>
-    c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-
-  const luminance =
-    0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
-
-  return luminance > 0.36 ? '#0A0A0A' : '#FFFFFF';
 }

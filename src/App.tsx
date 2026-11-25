@@ -145,9 +145,9 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-[100dvh] w-full bg-[#050505] sm:flex sm:justify-center">
+    <div className="min-h-[100dvh] w-full bg-[#050507] sm:flex sm:justify-center">
       {/* App Shell Container: Full screen on mobile, centered mobile-app frame on desktop */}
-      <div className="relative min-h-[100dvh] w-full bg-[#0A0A0A] sm:max-w-[460px] sm:border-x sm:border-white/10 sm:shadow-2xl">
+      <div className="relative min-h-[100dvh] w-full bg-[#09090B] sm:max-w-[460px] sm:border-x sm:border-white/[0.08]">
         {screen.view === 'home' && (
           <Home
             workouts={data.workouts}

@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Barlow Condensed", "Oswald", system-ui, -apple-system, sans-serif;
-  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
+  --font-sans: "Inter", "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 @layer base {
@@ -10,8 +10,8 @@
   body,
   #root {
     min-height: 100dvh;
-    background-color: #0A0A0A;
-    color: #FFFFFF;
+    background-color: #09090B;
+    color: #FAFAFA;
     font-family: var(--font-sans);
     overscroll-behavior: none;
     -webkit-tap-highlight-color: transparent;
@@ -26,17 +26,17 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Custom sleek dark scrollbar for desktop */
+/* Subtle dark scrollbar for desktop */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  background: #09090B;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272A;
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 9999px;
 }
