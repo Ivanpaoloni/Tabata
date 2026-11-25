@@ -38,39 +38,41 @@ export function HistoryModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 backdrop-blur-sm sm:items-center"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 backdrop-blur-sm"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Historial de entrenamientos"
     >
       <div
-        className="flex max-h-[86dvh] w-full max-w-md flex-col rounded-t-3xl border border-white/8 bg-[#121215] sm:rounded-3xl"
-        style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
+        className="flex max-h-[88dvh] w-full max-w-md flex-col rounded-t-3xl border-t border-white/10 bg-[#121215] pt-3"
+        style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between border-b border-white/8 px-5 py-4">
+        <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-white/20" />
+
+        <div className="flex items-center justify-between border-b border-white/8 px-5 pb-3.5">
           <h2 className="font-display text-lg font-semibold tracking-tight text-[#FAFAFA]">
             Historial
           </h2>
           <button
             type="button"
             onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/8 bg-[#18181B] text-zinc-400 transition hover:text-white active:scale-95"
+            className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/8 bg-[#18181B] text-zinc-300 transition-all duration-100 active:scale-97 active:bg-white/10"
             aria-label="Cerrar historial"
           >
-            <X className="h-4 w-4" />
+            <X className="h-5 w-5" />
           </button>
         </div>
 
         <div className="grid grid-cols-2 gap-3 px-5 py-4">
-          <div className="rounded-2xl border border-white/8 bg-[#18181B] p-3.5">
+          <div className="rounded-2xl border border-white/8 bg-[#18181B] p-4">
             <span className="text-xs font-medium text-zinc-400">Sesiones</span>
             <div className="font-display tabular-nums mt-1 text-2xl font-semibold tracking-tight text-[#FAFAFA]">
               {history.length}
             </div>
           </div>
-          <div className="rounded-2xl border border-white/8 bg-[#18181B] p-3.5">
+          <div className="rounded-2xl border border-white/8 bg-[#18181B] p-4">
             <span className="text-xs font-medium text-zinc-400">
               Minutos totales
             </span>
@@ -92,11 +94,11 @@ export function HistoryModal({
               </p>
             </div>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-3">
               {history.map((entry) => (
                 <div
                   key={entry.id}
-                  className="flex items-center justify-between gap-3 rounded-2xl border border-white/8 bg-[#18181B] px-4 py-3"
+                  className="flex min-h-18 items-center justify-between gap-3 rounded-2xl border border-white/8 bg-[#18181B] px-4 py-3"
                 >
                   <div className="flex min-w-0 items-center gap-3">
                     <span
@@ -108,7 +110,7 @@ export function HistoryModal({
                         {entry.workoutName}
                       </div>
                       <div className="mt-0.5 flex items-center gap-1.5 text-xs text-zinc-400">
-                        <Calendar className="h-3 w-3" />
+                        <Calendar className="h-3.5 w-3.5" />
                         <span>{formatDateLabel(entry.completedAt)}</span>
                       </div>
                     </div>
@@ -124,10 +126,10 @@ export function HistoryModal({
                     <button
                       type="button"
                       onClick={() => onDeleteEntry(entry.id)}
-                      className="flex h-8 w-8 items-center justify-center rounded-xl text-zinc-500 transition hover:bg-white/6 hover:text-red-400 active:scale-95"
+                      className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/8 bg-[#121215] text-zinc-400 transition-all duration-100 active:scale-97 active:bg-red-500/15 active:text-[#F87171]"
                       aria-label="Eliminar registro"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="h-5 w-5" />
                     </button>
                   </div>
                 </div>
@@ -137,13 +139,13 @@ export function HistoryModal({
         </div>
 
         {history.length > 0 && (
-          <div className="border-t border-white/8 px-5 pt-3">
+          <div className="border-t border-white/8 px-5 pt-3.5">
             <button
               type="button"
               onClick={onClearAll}
-              className="flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/8 bg-[#18181B] text-xs font-medium text-red-400 transition hover:bg-red-500/10 active:scale-98"
+              className="flex h-14 w-full items-center justify-center gap-2 rounded-2xl border border-red-500/20 bg-red-500/10 text-sm font-semibold text-[#F87171] transition-all duration-100 active:scale-97 active:bg-red-500/20"
             >
-              <Trash2 className="h-3.5 w-3.5" />
+              <Trash2 className="h-5 w-5" />
               Limpiar historial
             </button>
           </div>

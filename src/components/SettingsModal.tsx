@@ -99,28 +99,30 @@ export function SettingsModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 backdrop-blur-sm sm:items-center"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 backdrop-blur-sm"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Ajustes"
     >
       <div
-        className="flex max-h-[88dvh] w-full max-w-md flex-col rounded-t-3xl border border-white/8 bg-[#121215] sm:rounded-3xl"
+        className="flex max-h-[90dvh] w-full max-w-md flex-col rounded-t-3xl border-t border-white/10 bg-[#121215] pt-3"
         style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between border-b border-white/8 px-5 py-4">
+        <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-white/20" />
+
+        <div className="flex items-center justify-between border-b border-white/8 px-5 pb-3.5">
           <h2 className="font-display text-lg font-semibold tracking-tight text-[#FAFAFA]">
             Ajustes
           </h2>
           <button
             type="button"
             onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/8 bg-[#18181B] text-zinc-400 transition hover:text-white active:scale-95"
+            className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/8 bg-[#18181B] text-zinc-300 transition-all duration-100 active:scale-97 active:bg-white/10"
             aria-label="Cerrar ajustes"
           >
-            <X className="h-4 w-4" />
+            <X className="h-5 w-5" />
           </button>
         </div>
 
@@ -133,9 +135,9 @@ export function SettingsModal({
               <ToggleRow
                 icon={
                   settings.soundEnabled ? (
-                    <Volume2 className="h-4 w-4 text-[#34D399]" />
+                    <Volume2 className="h-5 w-5 text-[#34D399]" />
                   ) : (
-                    <VolumeX className="h-4 w-4 text-zinc-500" />
+                    <VolumeX className="h-5 w-5 text-zinc-500" />
                   )
                 }
                 title="Sonidos de fase"
@@ -162,9 +164,11 @@ export function SettingsModal({
                 onChange={() => toggle('voiceEnabled')}
               />
               {settings.voiceEnabled && (
-                <div className="flex items-center justify-between px-4 py-3">
-                  <span className="text-sm text-zinc-300">Idioma de voz</span>
-                  <div className="flex gap-1.5">
+                <div className="flex min-h-15 items-center justify-between gap-3 px-4 py-3">
+                  <span className="text-sm font-medium text-zinc-300">
+                    Idioma de voz
+                  </span>
+                  <div className="flex gap-2.5">
                     {(['es-ES', 'en-US'] as const).map((lang) => (
                       <button
                         key={lang}
@@ -172,10 +176,10 @@ export function SettingsModal({
                         onClick={() =>
                           onUpdateSettings({ ...settings, voiceLang: lang })
                         }
-                        className={`rounded-lg px-3 py-1.5 text-xs font-medium transition ${
+                        className={`flex h-12 min-w-20 items-center justify-center rounded-xl px-3 text-xs font-semibold transition-all duration-100 active:scale-97 ${
                           settings.voiceLang === lang
                             ? 'bg-[#FAFAFA] text-[#09090B]'
-                            : 'bg-white/6 text-zinc-300'
+                            : 'bg-white/6 text-zinc-300 active:bg-white/10'
                         }`}
                       >
                         {lang === 'es-ES' ? 'Español' : 'English'}
@@ -185,7 +189,7 @@ export function SettingsModal({
                 </div>
               )}
               <ToggleRow
-                icon={<Vibrate className="h-4 w-4 text-zinc-400" />}
+                icon={<Vibrate className="h-5 w-5 text-zinc-400" />}
                 title="Vibración"
                 subtitle="Pulso al cambiar de intervalo"
                 checked={settings.vibrationEnabled}
@@ -196,9 +200,9 @@ export function SettingsModal({
             <button
               type="button"
               onClick={handleTestSound}
-              className="mt-2.5 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/8 bg-[#18181B] text-xs font-medium text-zinc-200 transition hover:bg-white/6 active:scale-98"
+              className="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-2xl border border-white/8 bg-[#18181B] text-sm font-medium text-zinc-200 transition-all duration-100 active:scale-97 active:bg-white/10"
             >
-              <Volume2 className="h-4 w-4 text-zinc-400" />
+              <Volume2 className="h-5 w-5 text-zinc-400" />
               Probar sonido
             </button>
           </section>
@@ -207,22 +211,22 @@ export function SettingsModal({
             <div className="mb-2.5 text-xs font-medium text-zinc-400">
               Copia de seguridad
             </div>
-            <div className="grid grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
                 onClick={handleExport}
-                className="flex h-11 items-center justify-center gap-2 rounded-xl border border-white/8 bg-[#18181B] text-xs font-medium text-[#FAFAFA] transition hover:bg-white/6 active:scale-95"
+                className="flex h-12 items-center justify-center gap-2 rounded-2xl border border-white/8 bg-[#18181B] text-sm font-medium text-[#FAFAFA] transition-all duration-100 active:scale-97 active:bg-white/10"
               >
-                <Download className="h-4 w-4 text-zinc-400" />
-                Exportar JSON
+                <Download className="h-5 w-5 text-zinc-400" />
+                Exportar
               </button>
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="flex h-11 items-center justify-center gap-2 rounded-xl border border-white/8 bg-[#18181B] text-xs font-medium text-[#FAFAFA] transition hover:bg-white/6 active:scale-95"
+                className="flex h-12 items-center justify-center gap-2 rounded-2xl border border-white/8 bg-[#18181B] text-sm font-medium text-[#FAFAFA] transition-all duration-100 active:scale-97 active:bg-white/10"
               >
-                <Upload className="h-4 w-4 text-zinc-400" />
-                Importar JSON
+                <Upload className="h-5 w-5 text-zinc-400" />
+                Importar
               </button>
               <input
                 ref={fileInputRef}
@@ -242,15 +246,15 @@ export function SettingsModal({
                   text: 'Se restauraron las rutinas predefinidas.',
                 });
               }}
-              className="mt-2.5 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/8 bg-transparent text-xs font-medium text-zinc-400 transition hover:bg-white/4 hover:text-zinc-200 active:scale-98"
+              className="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-2xl border border-white/8 bg-transparent text-sm font-medium text-zinc-300 transition-all duration-100 active:scale-97 active:bg-white/10"
             >
-              <RotateCcw className="h-3.5 w-3.5" />
+              <RotateCcw className="h-4 w-4" />
               Restaurar rutinas predefinidas
             </button>
 
             {feedback && (
               <div
-                className={`mt-3 rounded-xl border px-3.5 py-2.5 text-xs font-medium ${
+                className={`mt-3 rounded-2xl border px-4 py-3 text-xs font-medium ${
                   feedback.type === 'ok'
                     ? 'border-[#34D399]/25 bg-[#34D399]/10 text-[#34D399]'
                     : 'border-red-500/25 bg-red-500/10 text-red-400'
@@ -279,23 +283,25 @@ function ToggleRow({ icon, title, subtitle, checked, onChange }: ToggleRowProps)
     <button
       type="button"
       onClick={onChange}
-      className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left transition active:bg-white/3"
+      className="flex min-h-15 w-full items-center justify-between gap-4 px-4 py-3.5 text-left transition-all duration-100 active:scale-97 active:bg-white/10"
     >
       <div className="flex items-center gap-3">
         {icon}
         <div>
           <div className="text-sm font-medium text-[#FAFAFA]">{title}</div>
-          <div className="text-xs text-zinc-500">{subtitle}</div>
+          <div className="mt-0.5 text-xs leading-snug text-zinc-400">
+            {subtitle}
+          </div>
         </div>
       </div>
       <div
-        className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${
+        className={`relative h-7 w-12 shrink-0 rounded-full transition-colors ${
           checked ? 'bg-[#34D399]' : 'bg-white/15'
         }`}
       >
         <span
-          className={`absolute top-0.5 h-5 w-5 rounded-full transition-transform ${
-            checked ? 'translate-x-5 bg-[#09090B]' : 'translate-x-0.5 bg-white'
+          className={`absolute top-1 h-5 w-5 rounded-full transition-transform ${
+            checked ? 'translate-x-6 bg-[#09090B]' : 'translate-x-1 bg-white'
           }`}
         />
       </div>
