@@ -72,12 +72,15 @@ export interface WorkoutHistoryEntry {
   plannedDurationSeconds: number;
 }
 
+export type AudioMode = 'playback' | 'ambient';
+
 export interface AppSettings {
   soundEnabled: boolean;
   voiceEnabled: boolean;
   voiceLang: 'es-ES' | 'en-US';
   vibrationEnabled: boolean;
   countdownBeeps: boolean;
+  audioMode: AudioMode;
 }
 
 export interface QuickTabataConfig {

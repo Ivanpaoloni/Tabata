@@ -152,6 +152,7 @@ export default function App() {
           <Home
             workouts={data.workouts}
             quickTabata={data.quickTabata}
+            audioMode={data.settings.audioMode}
             historyCount={data.history.length}
             onUpdateQuickTabata={handleUpdateQuickTabata}
             onStartWorkout={(workout) => setScreen({ view: 'player', workout })}

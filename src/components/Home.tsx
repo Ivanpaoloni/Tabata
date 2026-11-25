@@ -12,6 +12,7 @@ import {
 import { useState } from 'react';
 import {
   PHASE_COLORS,
+  type AudioMode,
   type QuickTabataConfig,
   type Workout,
 } from '../types/workout';
@@ -28,6 +29,7 @@ import { TimePickerModal } from './TimePickerModal';
 interface HomeProps {
   workouts: Workout[];
   quickTabata: QuickTabataConfig;
+  audioMode: AudioMode;
   historyCount: number;
   onUpdateQuickTabata: (next: QuickTabataConfig) => void;
   onStartWorkout: (workout: Workout) => void;
@@ -44,6 +46,7 @@ type QuickPickerField = 'workSeconds' | 'restSeconds' | 'repeats' | null;
 export function Home({
   workouts,
   quickTabata,
+  audioMode,
   historyCount,
   onUpdateQuickTabata,
   onStartWorkout,
@@ -61,7 +64,7 @@ export function Home({
   const quickTotalSec = getTotalWorkoutDuration(quickWorkout);
 
   const handlePlay = (workout: Workout) => {
-    unlockAudio();
+    unlockAudio(audioMode);
     onStartWorkout(workout);
   };
 

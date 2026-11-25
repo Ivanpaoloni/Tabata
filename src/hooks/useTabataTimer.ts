@@ -172,7 +172,7 @@ export function useTabataTimer(
 
   const start = useCallback(() => {
     if (steps.length === 0) return;
-    unlockAudio();
+    unlockAudio(settingsRef.current.audioMode);
 
     const now = performance.now();
     if (statusRef.current === 'idle' || statusRef.current === 'finished') {
@@ -221,7 +221,7 @@ export function useTabataTimer(
   const jumpToStep = useCallback(
     (targetIdx: number) => {
       if (steps.length === 0) return;
-      unlockAudio();
+      unlockAudio(settingsRef.current.audioMode);
       const clamped = Math.max(0, Math.min(steps.length - 1, targetIdx));
       const targetStep = steps[clamped];
       const durMs = targetStep.durationSeconds * 1000;

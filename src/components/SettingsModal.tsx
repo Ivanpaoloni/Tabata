@@ -10,7 +10,11 @@ import {
 import { useRef, useState } from 'react';
 import type { AppSettings, PersistedAppData } from '../types/workout';
 import { exportAppDataToJson, parseImportedBackup } from '../storage/workoutStorage';
-import { playWorkStart, unlockAudio } from '../utils/soundEngine';
+import {
+  applyAudioSessionMode,
+  playWorkStart,
+  unlockAudio,
+} from '../utils/soundEngine';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -46,8 +50,17 @@ export function SettingsModal({
   };
 
   const handleTestSound = () => {
-    unlockAudio();
+    unlockAudio(settings.audioMode);
     playWorkStart(true);
+  };
+
+  const handleToggleAudioMode = () => {
+    const nextMode = settings.audioMode === 'playback' ? 'ambient' : 'playback';
+    applyAudioSessionMode(nextMode);
+    onUpdateSettings({
+      ...settings,
+      audioMode: nextMode,
+    });
   };
 
   const handleExport = () => {
@@ -129,6 +142,12 @@ export function SettingsModal({
                 subtitle="Tonos sintetizados locales (funciona offline)"
                 checked={settings.soundEnabled}
                 onChange={() => toggle('soundEnabled')}
+              />
+              <ToggleRow
+                title="Sonar aunque el iPhone esté en silencio"
+                subtitle="Activado: ignora el modo silencio pero puede pausar Spotify. Desactivado: se mezcla con tu música."
+                checked={settings.audioMode === 'playback'}
+                onChange={handleToggleAudioMode}
               />
               <ToggleRow
                 title="Cuenta regresiva 3-2-1"

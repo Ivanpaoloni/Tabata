@@ -18,6 +18,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   voiceLang: 'es-ES',
   vibrationEnabled: true,
   countdownBeeps: true,
+  audioMode: 'playback',
 };
 
 export const DEFAULT_QUICK_TABATA: QuickTabataConfig = {
@@ -264,6 +265,7 @@ function sanitizeSettings(raw: unknown): AppSettings {
       typeof obj.countdownBeeps === 'boolean'
         ? obj.countdownBeeps
         : DEFAULT_SETTINGS.countdownBeeps,
+    audioMode: obj.audioMode === 'ambient' ? 'ambient' : 'playback',
   };
 }
 

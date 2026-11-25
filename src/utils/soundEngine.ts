@@ -1,6 +1,24 @@
-import type { AppSettings, PhaseType } from '../types/workout';
+import type { AppSettings, AudioMode, PhaseType } from '../types/workout';
 
 let sharedAudioCtx: AudioContext | null = null;
+
+type NavigatorWithAudioSession = Navigator & {
+  audioSession?: {
+    type: string;
+  };
+};
+
+export function applyAudioSessionMode(audioMode: AudioMode): void {
+  if (typeof navigator === 'undefined') return;
+  try {
+    const nav = navigator as NavigatorWithAudioSession;
+    if (nav.audioSession) {
+      nav.audioSession.type = audioMode;
+    }
+  } catch {
+    // Ignore unsupported audioSession errors
+  }
+}
 
 function getAudioContext(): AudioContext | null {
   if (typeof window === 'undefined') return null;
@@ -19,7 +37,9 @@ function getAudioContext(): AudioContext | null {
 /**
  * Must be called synchronously inside a user gesture (click/tap) to unlock audio on iOS Safari.
  */
-export function unlockAudio(): void {
+export function unlockAudio(audioMode: AudioMode = 'playback'): void {
+  applyAudioSessionMode(audioMode);
+
   const ctx = getAudioContext();
   if (!ctx) return;
   if (ctx.state === 'suspended') {
