@@ -54,7 +54,7 @@ export function ActivePlayer({
   if (timer.status === 'finished') {
     return (
       <div
-        className="flex h-[100dvh] flex-col items-center justify-between bg-[#09090B] px-6 text-center text-[#FAFAFA]"
+        className="flex h-dvh flex-col items-center justify-between bg-[#09090B] px-6 text-center text-[#FAFAFA]"
         style={{
           paddingTop: 'max(2rem, env(safe-area-inset-top))',
           paddingBottom: 'max(2rem, env(safe-area-inset-bottom))',
@@ -66,7 +66,7 @@ export function ActivePlayer({
 
         <div className="flex w-full max-w-xs flex-col items-center">
           <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[#34D399]/25 bg-[#34D399]/10 text-[#34D399]">
-            <Check className="h-7 w-7 stroke-[2]" />
+            <Check className="h-7 w-7 stroke-2" />
           </div>
 
           <h1 className="font-display text-2xl font-semibold tracking-tight text-[#FAFAFA]">
@@ -78,7 +78,7 @@ export function ActivePlayer({
           </p>
 
           <div className="mt-8 grid w-full grid-cols-2 gap-2.5">
-            <div className="rounded-2xl border border-white/[0.08] bg-[#121215] p-4">
+            <div className="rounded-2xl border border-white/8 bg-[#121215] p-4">
               <div className="text-[11px] font-medium text-zinc-500">
                 Tiempo real
               </div>
@@ -86,7 +86,7 @@ export function ActivePlayer({
                 {formatTime(timer.actualElapsedSeconds || timer.totalDurationSeconds)}
               </div>
             </div>
-            <div className="rounded-2xl border border-white/[0.08] bg-[#121215] p-4">
+            <div className="rounded-2xl border border-white/8 bg-[#121215] p-4">
               <div className="text-[11px] font-medium text-zinc-500">
                 Planificado
               </div>
@@ -104,7 +104,7 @@ export function ActivePlayer({
               timer.restart();
               timer.start();
             }}
-            className="flex h-12 items-center justify-center gap-2 rounded-2xl border border-white/[0.08] bg-[#121215] text-sm font-medium text-[#FAFAFA] transition hover:bg-[#18181B] active:scale-95"
+            className="flex h-12 items-center justify-center gap-2 rounded-2xl border border-white/8 bg-[#121215] text-sm font-medium text-[#FAFAFA] transition hover:bg-[#18181B] active:scale-95"
           >
             <RotateCcw className="h-4 w-4 text-zinc-400" />
             Repetir
@@ -130,7 +130,7 @@ export function ActivePlayer({
 
   return (
     <div
-      className="flex h-[100dvh] flex-col overflow-hidden text-[#FAFAFA] transition-colors duration-500 select-none"
+      className="flex h-dvh flex-col overflow-hidden text-[#FAFAFA] transition-colors duration-500 select-none"
       style={{ backgroundColor: theme.bg }}
     >
       {/* Top Status Bar */}
@@ -141,7 +141,7 @@ export function ActivePlayer({
         <button
           type="button"
           onClick={handleCloseClick}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.04] text-zinc-300 transition hover:text-white active:scale-95"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/8 bg-white/4 text-zinc-300 transition hover:text-white active:scale-95"
           aria-label="Cerrar entrenamiento"
         >
           <X className="h-4 w-4" />
@@ -173,7 +173,7 @@ export function ActivePlayer({
         <button
           type="button"
           onClick={onToggleMute}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.04] text-zinc-300 transition hover:text-white active:scale-95"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/8 bg-white/4 text-zinc-300 transition hover:text-white active:scale-95"
           aria-label={settings.soundEnabled ? 'Silenciar sonido' : 'Activar sonido'}
         >
           {settings.soundEnabled ? (
@@ -221,7 +221,7 @@ export function ActivePlayer({
 
         {/* Minimal Progress Bar */}
         <div className="mt-10 w-full max-w-xs">
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.08]">
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/8">
             <div
               className="h-full rounded-full transition-[width] duration-75"
               style={{
@@ -241,7 +241,7 @@ export function ActivePlayer({
         {/* Discreet Next-Step Pill */}
         <div className="mt-8">
           {step?.upNext && upNextTheme ? (
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-xs font-medium text-zinc-300">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/3 px-4 py-2 text-xs font-medium text-zinc-300">
               <span className="text-zinc-500">Siguiente</span>
               <span className="text-zinc-600">·</span>
               <span
@@ -254,7 +254,7 @@ export function ActivePlayer({
               </span>
             </div>
           ) : (
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-xs font-medium text-zinc-400">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/3 px-4 py-2 text-xs font-medium text-zinc-400">
               Último intervalo · Finalizar
             </div>
           )}
@@ -268,7 +268,7 @@ export function ActivePlayer({
       >
         {/* Clean Neutral Counters */}
         <div className="grid grid-cols-2 gap-2.5">
-          <div className="flex flex-col items-center rounded-2xl border border-white/[0.08] bg-white/[0.03] py-3">
+          <div className="flex flex-col items-center rounded-2xl border border-white/8 bg-white/3 py-3">
             <span className="font-display tabular-nums text-2xl font-semibold tracking-tight text-[#FAFAFA]">
               {step?.repeatsLeft ?? 0}
             </span>
@@ -277,7 +277,7 @@ export function ActivePlayer({
             </span>
           </div>
 
-          <div className="flex flex-col items-center rounded-2xl border border-white/[0.08] bg-white/[0.03] py-3">
+          <div className="flex flex-col items-center rounded-2xl border border-white/8 bg-white/3 py-3">
             <span className="font-display tabular-nums text-2xl font-semibold tracking-tight text-[#FAFAFA]">
               {step?.cyclesLeft ?? 0}
             </span>
@@ -292,7 +292,7 @@ export function ActivePlayer({
           <button
             type="button"
             onClick={timer.prevStep}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.04] text-zinc-300 transition hover:bg-white/[0.08] hover:text-white active:scale-95"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/8 bg-white/4 text-zinc-300 transition hover:bg-white/8 hover:text-white active:scale-95"
             aria-label="Intervalo anterior"
           >
             <SkipBack className="h-5 w-5" />
@@ -301,20 +301,20 @@ export function ActivePlayer({
           <button
             type="button"
             onClick={timer.togglePlay}
-            className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#FAFAFA] text-[#09090B] transition hover:bg-zinc-200 active:scale-95"
+            className="flex h-18 w-18 items-center justify-center rounded-full bg-[#FAFAFA] text-[#09090B] transition hover:bg-zinc-200 active:scale-95"
             aria-label={timer.status === 'running' ? 'Pausar' : 'Reanudar'}
           >
             {timer.status === 'running' ? (
               <Pause className="h-7 w-7 fill-[#09090B]" />
             ) : (
-              <Play className="h-7 w-7 translate-x-[2px] fill-[#09090B]" />
+              <Play className="h-7 w-7 translate-x-0.5 fill-[#09090B]" />
             )}
           </button>
 
           <button
             type="button"
             onClick={timer.nextStep}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.04] text-zinc-300 transition hover:bg-white/[0.08] hover:text-white active:scale-95"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/8 bg-white/4 text-zinc-300 transition hover:bg-white/8 hover:text-white active:scale-95"
             aria-label="Siguiente intervalo"
           >
             <SkipForward className="h-5 w-5" />
@@ -326,7 +326,7 @@ export function ActivePlayer({
             <button
               type="button"
               onClick={timer.restart}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.04] px-3.5 py-1.5 text-xs font-medium text-zinc-300 transition hover:text-white active:scale-95"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/4 px-3.5 py-1.5 text-xs font-medium text-zinc-300 transition hover:text-white active:scale-95"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Reiniciar sesión
@@ -342,7 +342,7 @@ export function ActivePlayer({
           onClick={() => setConfirmExit(false)}
         >
           <div
-            className="w-full max-w-xs rounded-3xl border border-white/[0.08] bg-[#121215] p-6 text-center"
+            className="w-full max-w-xs rounded-3xl border border-white/8 bg-[#121215] p-6 text-center"
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="font-display text-lg font-semibold tracking-tight text-[#FAFAFA]">
@@ -358,7 +358,7 @@ export function ActivePlayer({
                   setConfirmExit(false);
                   timer.start();
                 }}
-                className="h-11 rounded-2xl border border-white/[0.08] bg-[#18181B] text-xs font-medium text-[#FAFAFA] active:scale-95"
+                className="h-11 rounded-2xl border border-white/8 bg-[#18181B] text-xs font-medium text-[#FAFAFA] active:scale-95"
               >
                 Continuar
               </button>

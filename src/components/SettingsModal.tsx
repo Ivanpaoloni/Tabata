@@ -106,18 +106,18 @@ export function SettingsModal({
       aria-label="Ajustes"
     >
       <div
-        className="flex max-h-[88dvh] w-full max-w-md flex-col rounded-t-3xl border border-white/[0.08] bg-[#121215] sm:rounded-3xl"
+        className="flex max-h-[88dvh] w-full max-w-md flex-col rounded-t-3xl border border-white/8 bg-[#121215] sm:rounded-3xl"
         style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between border-b border-white/[0.08] px-5 py-4">
+        <div className="flex items-center justify-between border-b border-white/8 px-5 py-4">
           <h2 className="font-display text-lg font-semibold tracking-tight text-[#FAFAFA]">
             Ajustes
           </h2>
           <button
             type="button"
             onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] bg-[#18181B] text-zinc-400 transition hover:text-white active:scale-95"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/8 bg-[#18181B] text-zinc-400 transition hover:text-white active:scale-95"
             aria-label="Cerrar ajustes"
           >
             <X className="h-4 w-4" />
@@ -129,7 +129,7 @@ export function SettingsModal({
             <div className="mb-2.5 text-xs font-medium text-zinc-400">
               Sonido y respuesta táctil
             </div>
-            <div className="divide-y divide-white/[0.06] overflow-hidden rounded-2xl border border-white/[0.08] bg-[#18181B]">
+            <div className="divide-y divide-white/6 overflow-hidden rounded-2xl border border-white/8 bg-[#18181B]">
               <ToggleRow
                 icon={
                   settings.soundEnabled ? (
@@ -175,7 +175,7 @@ export function SettingsModal({
                         className={`rounded-lg px-3 py-1.5 text-xs font-medium transition ${
                           settings.voiceLang === lang
                             ? 'bg-[#FAFAFA] text-[#09090B]'
-                            : 'bg-white/[0.06] text-zinc-300'
+                            : 'bg-white/6 text-zinc-300'
                         }`}
                       >
                         {lang === 'es-ES' ? 'Español' : 'English'}
@@ -196,7 +196,7 @@ export function SettingsModal({
             <button
               type="button"
               onClick={handleTestSound}
-              className="mt-2.5 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/[0.08] bg-[#18181B] text-xs font-medium text-zinc-200 transition hover:bg-white/[0.06] active:scale-[0.98]"
+              className="mt-2.5 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/8 bg-[#18181B] text-xs font-medium text-zinc-200 transition hover:bg-white/6 active:scale-98"
             >
               <Volume2 className="h-4 w-4 text-zinc-400" />
               Probar sonido
@@ -211,7 +211,7 @@ export function SettingsModal({
               <button
                 type="button"
                 onClick={handleExport}
-                className="flex h-11 items-center justify-center gap-2 rounded-xl border border-white/[0.08] bg-[#18181B] text-xs font-medium text-[#FAFAFA] transition hover:bg-white/[0.06] active:scale-95"
+                className="flex h-11 items-center justify-center gap-2 rounded-xl border border-white/8 bg-[#18181B] text-xs font-medium text-[#FAFAFA] transition hover:bg-white/6 active:scale-95"
               >
                 <Download className="h-4 w-4 text-zinc-400" />
                 Exportar JSON
@@ -219,7 +219,7 @@ export function SettingsModal({
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="flex h-11 items-center justify-center gap-2 rounded-xl border border-white/[0.08] bg-[#18181B] text-xs font-medium text-[#FAFAFA] transition hover:bg-white/[0.06] active:scale-95"
+                className="flex h-11 items-center justify-center gap-2 rounded-xl border border-white/8 bg-[#18181B] text-xs font-medium text-[#FAFAFA] transition hover:bg-white/6 active:scale-95"
               >
                 <Upload className="h-4 w-4 text-zinc-400" />
                 Importar JSON
@@ -242,7 +242,7 @@ export function SettingsModal({
                   text: 'Se restauraron las rutinas predefinidas.',
                 });
               }}
-              className="mt-2.5 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/[0.08] bg-transparent text-xs font-medium text-zinc-400 transition hover:bg-white/[0.04] hover:text-zinc-200 active:scale-[0.98]"
+              className="mt-2.5 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/8 bg-transparent text-xs font-medium text-zinc-400 transition hover:bg-white/4 hover:text-zinc-200 active:scale-98"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Restaurar rutinas predefinidas
@@ -279,7 +279,7 @@ function ToggleRow({ icon, title, subtitle, checked, onChange }: ToggleRowProps)
     <button
       type="button"
       onClick={onChange}
-      className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left transition active:bg-white/[0.03]"
+      className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left transition active:bg-white/3"
     >
       <div className="flex items-center gap-3">
         {icon}

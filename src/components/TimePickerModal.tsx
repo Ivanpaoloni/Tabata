@@ -83,7 +83,7 @@ function TimePickerContent({
       aria-label={title}
     >
       <div
-        className="w-full max-w-md rounded-t-3xl border border-white/[0.08] bg-[#121215] px-5 pt-3.5 pb-6 sm:rounded-3xl"
+        className="w-full max-w-md rounded-t-3xl border border-white/8 bg-[#121215] px-5 pt-3.5 pb-6 sm:rounded-3xl"
         style={{ paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))' }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -107,7 +107,7 @@ function TimePickerContent({
           <button
             type="button"
             onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] bg-[#18181B] text-zinc-400 transition hover:text-white active:scale-95"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/8 bg-[#18181B] text-zinc-400 transition hover:text-white active:scale-95"
             aria-label="Cerrar"
           >
             <X className="h-4 w-4" />
@@ -116,7 +116,7 @@ function TimePickerContent({
 
         {/* Display / Direct Input */}
         {mode === 'time' ? (
-          <div className="mb-5 flex flex-col items-center rounded-2xl border border-white/[0.08] bg-[#09090B] py-5">
+          <div className="mb-5 flex flex-col items-center rounded-2xl border border-white/8 bg-[#09090B] py-5">
             <div className="flex items-center justify-center gap-1.5">
               <input
                 type="text"
@@ -127,7 +127,7 @@ function TimePickerContent({
                   setMinText(String(Math.floor(draft / 60)).padStart(2, '0'))
                 }
                 aria-label="Minutos"
-                className="font-display tabular-nums w-24 rounded-xl bg-white/[0.04] py-1.5 text-center text-5xl font-semibold tracking-tight text-[#FAFAFA] outline-none focus:ring-1 focus:ring-white/25"
+                className="font-display tabular-nums w-24 rounded-xl bg-white/4 py-1.5 text-center text-5xl font-semibold tracking-tight text-[#FAFAFA] outline-none focus:ring-1 focus:ring-white/25"
               />
               <span className="font-display text-4xl font-semibold text-zinc-500">
                 :
@@ -141,7 +141,7 @@ function TimePickerContent({
                   setSecText(String(draft % 60).padStart(2, '0'))
                 }
                 aria-label="Segundos"
-                className="font-display tabular-nums w-24 rounded-xl bg-white/[0.04] py-1.5 text-center text-5xl font-semibold tracking-tight text-[#FAFAFA] outline-none focus:ring-1 focus:ring-white/25"
+                className="font-display tabular-nums w-24 rounded-xl bg-white/4 py-1.5 text-center text-5xl font-semibold tracking-tight text-[#FAFAFA] outline-none focus:ring-1 focus:ring-white/25"
               />
             </div>
             <span className="mt-2 text-[11px] font-medium tracking-wide text-zinc-500">
@@ -149,7 +149,7 @@ function TimePickerContent({
             </span>
           </div>
         ) : (
-          <div className="mb-5 flex flex-col items-center rounded-2xl border border-white/[0.08] bg-[#09090B] py-6">
+          <div className="mb-5 flex flex-col items-center rounded-2xl border border-white/8 bg-[#09090B] py-6">
             <span className="font-display tabular-nums text-6xl font-semibold leading-none tracking-tight text-[#FAFAFA]">
               {draft}
             </span>
@@ -164,7 +164,7 @@ function TimePickerContent({
                 key={delta}
                 type="button"
                 onClick={() => updateDraft(draft + delta)}
-                className="tabular-nums flex h-11 items-center justify-center rounded-xl border border-white/[0.08] bg-[#18181B] text-xs font-medium text-zinc-200 transition hover:bg-white/[0.08] active:scale-95"
+                className="tabular-nums flex h-11 items-center justify-center rounded-xl border border-white/8 bg-[#18181B] text-xs font-medium text-zinc-200 transition hover:bg-white/8 active:scale-95"
               >
                 {delta > 0 ? `+${delta}s` : `${delta}s`}
               </button>
@@ -177,7 +177,7 @@ function TimePickerContent({
                 key={delta}
                 type="button"
                 onClick={() => updateDraft(draft + delta)}
-                className="tabular-nums flex h-11 items-center justify-center rounded-xl border border-white/[0.08] bg-[#18181B] text-sm font-medium text-zinc-200 transition hover:bg-white/[0.08] active:scale-95"
+                className="tabular-nums flex h-11 items-center justify-center rounded-xl border border-white/8 bg-[#18181B] text-sm font-medium text-zinc-200 transition hover:bg-white/8 active:scale-95"
               >
                 {delta > 0 ? `+${delta}` : `${delta}`}
               </button>
@@ -198,7 +198,7 @@ function TimePickerContent({
                 className={`tabular-nums rounded-xl border px-3 py-2 text-xs font-medium transition active:scale-95 ${
                   draft === 0
                     ? 'border-white/25 bg-[#FAFAFA] text-[#09090B]'
-                    : 'border-white/[0.08] bg-[#18181B] text-zinc-300'
+                    : 'border-white/8 bg-[#18181B] text-zinc-300'
                 }`}
               >
                 Desactivado
@@ -214,7 +214,7 @@ function TimePickerContent({
                   className={`tabular-nums rounded-xl border px-3 py-2 text-xs font-medium transition active:scale-95 ${
                     active
                       ? 'border-white/25 bg-[#FAFAFA] text-[#09090B]'
-                      : 'border-white/[0.08] bg-[#18181B] text-zinc-300'
+                      : 'border-white/8 bg-[#18181B] text-zinc-300'
                   }`}
                 >
                   {mode === 'time' ? `${preset}s` : preset}
@@ -228,7 +228,7 @@ function TimePickerContent({
         <button
           type="button"
           onClick={handleConfirm}
-          className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FAFAFA] text-sm font-semibold text-[#09090B] transition hover:bg-zinc-200 active:scale-[0.98]"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FAFAFA] text-sm font-semibold text-[#09090B] transition hover:bg-zinc-200 active:scale-98"
         >
           <Check className="h-4 w-4 stroke-[2.25]" />
           Confirmar

@@ -335,19 +335,19 @@ export function WorkoutEditor({
 
   return (
     <div
-      className="flex min-h-[100dvh] flex-col bg-[#09090B] text-[#FAFAFA]"
+      className="flex min-h-dvh flex-col bg-[#09090B] text-[#FAFAFA]"
       onClick={() => openRoundMenuId && setOpenRoundMenuId(null)}
     >
       {/* Fixed Top Bar */}
       <header
-        className="sticky top-0 z-30 border-b border-white/[0.08] bg-[#09090B]/95 backdrop-blur-md"
+        className="sticky top-0 z-30 border-b border-white/8 bg-[#09090B]/95 backdrop-blur-md"
         style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top))' }}
       >
         <div className="flex items-center justify-between px-5 pb-3.5">
           <button
             type="button"
             onClick={onCancel}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-[#121215] text-zinc-300 transition hover:text-white active:scale-95"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/8 bg-[#121215] text-zinc-300 transition hover:text-white active:scale-95"
             aria-label="Cancelar"
           >
             <X className="h-4 w-4" />
@@ -378,7 +378,7 @@ export function WorkoutEditor({
         style={{ paddingBottom: 'max(2.5rem, env(safe-area-inset-bottom))' }}
       >
         {/* Name + Color Dot */}
-        <section className="rounded-2xl border border-white/[0.08] bg-[#121215] px-4 py-3.5">
+        <section className="rounded-2xl border border-white/8 bg-[#121215] px-4 py-3.5">
           <div className="flex items-center gap-3">
             <input
               type="text"
@@ -402,7 +402,7 @@ export function WorkoutEditor({
           </div>
 
           {showColorPicker && (
-            <div className="mt-3 flex flex-wrap gap-2.5 border-t border-white/[0.06] pt-3">
+            <div className="mt-3 flex flex-wrap gap-2.5 border-t border-white/6 pt-3">
               {WORKOUT_PALETTE.map((hex) => (
                 <button
                   key={hex}
@@ -428,10 +428,10 @@ export function WorkoutEditor({
         <button
           type="button"
           onClick={() => setPicker({ kind: 'prepare' })}
-          className="flex w-full items-center justify-between gap-3 rounded-2xl border border-white/[0.08] bg-[#121215] px-4 py-3.5 text-left transition hover:border-white/[0.12] active:bg-[#18181B]"
+          className="flex w-full items-center justify-between gap-3 rounded-2xl border border-white/8 bg-[#121215] px-4 py-3.5 text-left transition hover:border-white/12 active:bg-[#18181B]"
         >
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/[0.06] bg-[#18181B] text-[#FBBF24]">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/6 bg-[#18181B] text-[#FBBF24]">
               <Timer className="h-4 w-4" />
             </div>
             <div>
@@ -459,10 +459,10 @@ export function WorkoutEditor({
             return (
               <section
                 key={round.id}
-                className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-[#121215]"
+                className="relative overflow-hidden rounded-3xl border border-white/8 bg-[#121215]"
               >
                 {/* Round Header */}
-                <div className="flex items-center justify-between border-b border-white/[0.06] bg-[#18181B]/60 px-4 py-3">
+                <div className="flex items-center justify-between border-b border-white/6 bg-[#18181B]/60 px-4 py-3">
                   <input
                     type="text"
                     value={round.name ?? `Ronda ${roundIdx + 1}`}
@@ -478,7 +478,7 @@ export function WorkoutEditor({
                       e.stopPropagation();
                       setOpenRoundMenuId(isMenuOpen ? null : round.id);
                     }}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-500 transition hover:bg-white/[0.06] hover:text-zinc-200"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-500 transition hover:bg-white/6 hover:text-zinc-200"
                     aria-label="Opciones de la ronda"
                   >
                     <MoreHorizontal className="h-4 w-4" />
@@ -486,7 +486,7 @@ export function WorkoutEditor({
 
                   {isMenuOpen && (
                     <div
-                      className="absolute top-11 right-4 z-20 w-40 overflow-hidden rounded-2xl border border-white/[0.1] bg-[#18181B] py-1"
+                      className="absolute top-11 right-4 z-20 w-40 overflow-hidden rounded-2xl border border-white/10 bg-[#18181B] py-1"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <button
@@ -495,7 +495,7 @@ export function WorkoutEditor({
                           setOpenRoundMenuId(null);
                           duplicateRound(round);
                         }}
-                        className="flex w-full items-center gap-2.5 px-3.5 py-2.5 text-xs font-medium text-zinc-200 hover:bg-white/[0.06]"
+                        className="flex w-full items-center gap-2.5 px-3.5 py-2.5 text-xs font-medium text-zinc-200 hover:bg-white/6"
                       >
                         <Copy className="h-3.5 w-3.5 text-zinc-400" />
                         Duplicar ronda
@@ -518,7 +518,7 @@ export function WorkoutEditor({
                 </div>
 
                 {/* Intervals */}
-                <div className="divide-y divide-white/[0.06]">
+                <div className="divide-y divide-white/6">
                   {round.intervals.map((interval, idx) => (
                     <div
                       key={interval.id}
@@ -527,7 +527,7 @@ export function WorkoutEditor({
                       <button
                         type="button"
                         onClick={() => cycleIntervalType(round.id, interval.id)}
-                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/[0.06] bg-[#18181B] transition active:scale-90"
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/6 bg-[#18181B] transition active:scale-90"
                         title="Cambiar tipo (Trabajo / Descanso / Ejercicio)"
                         aria-label="Cambiar tipo de intervalo"
                       >
@@ -569,7 +569,7 @@ export function WorkoutEditor({
                           type="button"
                           disabled={idx === 0}
                           onClick={() => moveInterval(round.id, idx, -1)}
-                          className="flex h-7 w-7 items-center justify-center rounded-lg text-zinc-500 enabled:hover:bg-white/[0.06] enabled:hover:text-zinc-200 disabled:opacity-25"
+                          className="flex h-7 w-7 items-center justify-center rounded-lg text-zinc-500 enabled:hover:bg-white/6 enabled:hover:text-zinc-200 disabled:opacity-25"
                           aria-label="Subir intervalo"
                         >
                           <ArrowUp className="h-3.5 w-3.5" />
@@ -578,7 +578,7 @@ export function WorkoutEditor({
                           type="button"
                           disabled={idx === round.intervals.length - 1}
                           onClick={() => moveInterval(round.id, idx, 1)}
-                          className="flex h-7 w-7 items-center justify-center rounded-lg text-zinc-500 enabled:hover:bg-white/[0.06] enabled:hover:text-zinc-200 disabled:opacity-25"
+                          className="flex h-7 w-7 items-center justify-center rounded-lg text-zinc-500 enabled:hover:bg-white/6 enabled:hover:text-zinc-200 disabled:opacity-25"
                           aria-label="Bajar intervalo"
                         >
                           <ArrowDown className="h-3.5 w-3.5" />
@@ -606,7 +606,7 @@ export function WorkoutEditor({
                             color: PHASE_COLORS[interval.type],
                           })
                         }
-                        className="flex shrink-0 items-center gap-0.5 rounded-xl border border-white/[0.06] bg-[#18181B] px-2.5 py-1.5 active:scale-95"
+                        className="flex shrink-0 items-center gap-0.5 rounded-xl border border-white/6 bg-[#18181B] px-2.5 py-1.5 active:scale-95"
                       >
                         <span className="font-display tabular-nums text-sm font-semibold text-[#FAFAFA]">
                           {formatCompactTime(interval.durationSeconds)}
@@ -618,14 +618,14 @@ export function WorkoutEditor({
                 </div>
 
                 {/* Add Interval to Round Row */}
-                <div className="flex flex-wrap items-center gap-1.5 border-t border-white/[0.06] bg-[#09090B]/40 px-3.5 py-2.5">
+                <div className="flex flex-wrap items-center gap-1.5 border-t border-white/6 bg-[#09090B]/40 px-3.5 py-2.5">
                   <span className="mr-1 text-[11px] font-medium text-zinc-500">
                     Añadir:
                   </span>
                   <button
                     type="button"
                     onClick={() => addIntervalToRound(round.id, 'work')}
-                    className="flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-[#18181B] px-2.5 py-1 text-xs font-medium text-zinc-200 transition hover:bg-white/[0.08] active:scale-95"
+                    className="flex items-center gap-1.5 rounded-lg border border-white/8 bg-[#18181B] px-2.5 py-1 text-xs font-medium text-zinc-200 transition hover:bg-white/8 active:scale-95"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-[#34D399]" />
                     Trabajo
@@ -633,7 +633,7 @@ export function WorkoutEditor({
                   <button
                     type="button"
                     onClick={() => addIntervalToRound(round.id, 'rest')}
-                    className="flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-[#18181B] px-2.5 py-1 text-xs font-medium text-zinc-200 transition hover:bg-white/[0.08] active:scale-95"
+                    className="flex items-center gap-1.5 rounded-lg border border-white/8 bg-[#18181B] px-2.5 py-1 text-xs font-medium text-zinc-200 transition hover:bg-white/8 active:scale-95"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-[#F87171]" />
                     Descanso
@@ -641,7 +641,7 @@ export function WorkoutEditor({
                   <button
                     type="button"
                     onClick={() => addIntervalToRound(round.id, 'custom')}
-                    className="flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-[#18181B] px-2.5 py-1 text-xs font-medium text-zinc-200 transition hover:bg-white/[0.08] active:scale-95"
+                    className="flex items-center gap-1.5 rounded-lg border border-white/8 bg-[#18181B] px-2.5 py-1 text-xs font-medium text-zinc-200 transition hover:bg-white/8 active:scale-95"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-[#60A5FA]" />
                     Ejercicio
@@ -654,10 +654,10 @@ export function WorkoutEditor({
                   onClick={() =>
                     setPicker({ kind: 'roundRepeats', roundId: round.id })
                   }
-                  className="flex w-full items-center justify-between gap-3 border-t border-white/[0.06] bg-[#121215] px-4 py-3.5 text-left transition hover:bg-[#18181B]/70"
+                  className="flex w-full items-center justify-between gap-3 border-t border-white/6 bg-[#121215] px-4 py-3.5 text-left transition hover:bg-[#18181B]/70"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/[0.06] bg-[#18181B] text-zinc-300">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/6 bg-[#18181B] text-zinc-300">
                       <Repeat className="h-4 w-4" />
                     </div>
                     <div>
@@ -689,7 +689,7 @@ export function WorkoutEditor({
               const lastRound = draft.rounds[draft.rounds.length - 1];
               if (lastRound) addIntervalToRound(lastRound.id, 'work');
             }}
-            className="flex h-11 items-center justify-center gap-1.5 rounded-2xl border border-white/[0.08] bg-[#121215] text-xs font-medium text-zinc-200 transition hover:bg-[#18181B] active:scale-95"
+            className="flex h-11 items-center justify-center gap-1.5 rounded-2xl border border-white/8 bg-[#121215] text-xs font-medium text-zinc-200 transition hover:bg-[#18181B] active:scale-95"
           >
             <Plus className="h-3.5 w-3.5 text-zinc-400" />
             Añadir intervalo
@@ -697,7 +697,7 @@ export function WorkoutEditor({
           <button
             type="button"
             onClick={addRound}
-            className="flex h-11 items-center justify-center gap-1.5 rounded-2xl border border-white/[0.08] bg-[#121215] text-xs font-medium text-zinc-200 transition hover:bg-[#18181B] active:scale-95"
+            className="flex h-11 items-center justify-center gap-1.5 rounded-2xl border border-white/8 bg-[#121215] text-xs font-medium text-zinc-200 transition hover:bg-[#18181B] active:scale-95"
           >
             <Plus className="h-3.5 w-3.5 text-zinc-400" />
             Añadir ronda
@@ -705,14 +705,14 @@ export function WorkoutEditor({
         </div>
 
         {/* Global Bottom Section */}
-        <section className="divide-y divide-white/[0.06] overflow-hidden rounded-3xl border border-white/[0.08] bg-[#121215]">
+        <section className="divide-y divide-white/6 overflow-hidden rounded-3xl border border-white/8 bg-[#121215]">
           <button
             type="button"
             onClick={() => setPicker({ kind: 'cycles' })}
             className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left transition hover:bg-[#18181B]/70"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/[0.06] bg-[#18181B] text-zinc-300">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/6 bg-[#18181B] text-zinc-300">
                 <RotateCw className="h-4 w-4" />
               </div>
               <div>
@@ -736,7 +736,7 @@ export function WorkoutEditor({
             className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left transition hover:bg-[#18181B]/70"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/[0.06] bg-[#18181B] text-[#60A5FA]">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/6 bg-[#18181B] text-[#60A5FA]">
                 <PauseCircle className="h-4 w-4" />
               </div>
               <div>
@@ -764,7 +764,7 @@ export function WorkoutEditor({
             className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left transition hover:bg-[#18181B]/70"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/[0.06] bg-[#18181B] text-[#60A5FA]">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/6 bg-[#18181B] text-[#60A5FA]">
                 <Snowflake className="h-4 w-4" />
               </div>
               <div>

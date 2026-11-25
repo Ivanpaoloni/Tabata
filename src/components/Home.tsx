@@ -70,18 +70,18 @@ export function Home({
 
   return (
     <div
-      className="flex min-h-[100dvh] flex-col bg-[#09090B] text-[#FAFAFA]"
+      className="flex min-h-dvh flex-col bg-[#09090B] text-[#FAFAFA]"
       onClick={() => openMenuId && setOpenMenuId(null)}
     >
       {/* Top Bar */}
       <header
-        className="sticky top-0 z-20 border-b border-white/[0.08] bg-[#09090B]/90 backdrop-blur-md"
+        className="sticky top-0 z-20 border-b border-white/8 bg-[#09090B]/90 backdrop-blur-md"
         style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top))' }}
       >
         <div className="flex items-center justify-between px-5 pb-3.5">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-white/[0.08] bg-[#18181B] text-[#34D399]">
-              <Timer className="h-4 w-4 stroke-[2]" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-white/8 bg-[#18181B] text-[#34D399]">
+              <Timer className="h-4 w-4 stroke-2" />
             </div>
             <h1 className="font-display text-lg font-semibold tracking-tight text-[#FAFAFA]">
               Tabata
@@ -92,10 +92,10 @@ export function Home({
             <button
               type="button"
               onClick={onOpenHistory}
-              className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.08] bg-[#121215] text-zinc-300 transition hover:text-white active:scale-95"
+              className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-white/8 bg-[#121215] text-zinc-300 transition hover:text-white active:scale-95"
               aria-label="Historial"
             >
-              <History className="h-[18px] w-[18px]" />
+              <History className="h-4.5 w-4.5" />
               {historyCount > 0 && (
                 <span className="tabular-nums absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#FAFAFA] px-1 text-[10px] font-semibold text-[#09090B]">
                   {historyCount > 99 ? '99+' : historyCount}
@@ -105,10 +105,10 @@ export function Home({
             <button
               type="button"
               onClick={onOpenSettings}
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.08] bg-[#121215] text-zinc-300 transition hover:text-white active:scale-95"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/8 bg-[#121215] text-zinc-300 transition hover:text-white active:scale-95"
               aria-label="Ajustes"
             >
-              <Settings className="h-[18px] w-[18px]" />
+              <Settings className="h-4.5 w-4.5" />
             </button>
           </div>
         </div>
@@ -119,7 +119,7 @@ export function Home({
         style={{ paddingBottom: 'max(2.5rem, env(safe-area-inset-bottom))' }}
       >
         {/* Quick Tabata Card */}
-        <section className="rounded-3xl border border-white/[0.08] bg-[#121215] p-4">
+        <section className="rounded-3xl border border-white/8 bg-[#121215] p-4">
           <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-[#34D399]" />
@@ -136,7 +136,7 @@ export function Home({
             <button
               type="button"
               onClick={() => setQuickPicker('workSeconds')}
-              className="flex flex-col items-start rounded-2xl border border-white/[0.06] bg-[#18181B] px-3.5 py-3 text-left transition hover:border-white/[0.12] active:scale-[0.98]"
+              className="flex flex-col items-start rounded-2xl border border-white/6 bg-[#18181B] px-3.5 py-3 text-left transition hover:border-white/12 active:scale-98"
             >
               <span className="flex items-center gap-1.5 text-[11px] font-medium text-zinc-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#34D399]" />
@@ -150,7 +150,7 @@ export function Home({
             <button
               type="button"
               onClick={() => setQuickPicker('restSeconds')}
-              className="flex flex-col items-start rounded-2xl border border-white/[0.06] bg-[#18181B] px-3.5 py-3 text-left transition hover:border-white/[0.12] active:scale-[0.98]"
+              className="flex flex-col items-start rounded-2xl border border-white/6 bg-[#18181B] px-3.5 py-3 text-left transition hover:border-white/12 active:scale-98"
             >
               <span className="flex items-center gap-1.5 text-[11px] font-medium text-zinc-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#F87171]" />
@@ -166,7 +166,7 @@ export function Home({
             <button
               type="button"
               onClick={() => setQuickPicker('repeats')}
-              className="flex flex-col items-start rounded-2xl border border-white/[0.06] bg-[#18181B] px-3.5 py-3 text-left transition hover:border-white/[0.12] active:scale-[0.98]"
+              className="flex flex-col items-start rounded-2xl border border-white/6 bg-[#18181B] px-3.5 py-3 text-left transition hover:border-white/12 active:scale-98"
             >
               <span className="flex items-center gap-1.5 text-[11px] font-medium text-zinc-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#60A5FA]" />
@@ -181,7 +181,7 @@ export function Home({
           <button
             type="button"
             onClick={() => handlePlay(quickWorkout)}
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FAFAFA] text-sm font-semibold text-[#09090B] transition hover:bg-zinc-200 active:scale-[0.98]"
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#FAFAFA] text-sm font-semibold text-[#09090B] transition hover:bg-zinc-200 active:scale-98"
           >
             <Play className="h-4 w-4 fill-[#09090B]" />
             Iniciar sesión
@@ -197,7 +197,7 @@ export function Home({
             <button
               type="button"
               onClick={onCreateWorkout}
-              className="flex h-9 items-center gap-1.5 rounded-xl border border-white/[0.08] bg-[#18181B] px-3 text-xs font-medium text-[#FAFAFA] transition hover:bg-white/[0.08] active:scale-95"
+              className="flex h-9 items-center gap-1.5 rounded-xl border border-white/8 bg-[#18181B] px-3 text-xs font-medium text-[#FAFAFA] transition hover:bg-white/8 active:scale-95"
             >
               <Plus className="h-3.5 w-3.5" />
               Nueva rutina
@@ -212,7 +212,7 @@ export function Home({
               return (
                 <div
                   key={workout.id}
-                  className="relative flex items-center justify-between gap-3 rounded-2xl border border-white/[0.08] bg-[#121215] px-4 py-3.5 transition hover:border-white/[0.12]"
+                  className="relative flex items-center justify-between gap-3 rounded-2xl border border-white/8 bg-[#121215] px-4 py-3.5 transition hover:border-white/12"
                 >
                   <button
                     type="button"
@@ -246,7 +246,7 @@ export function Home({
                         e.stopPropagation();
                         setOpenMenuId(isMenuOpen ? null : workout.id);
                       }}
-                      className="flex h-10 w-9 items-center justify-center rounded-xl text-zinc-500 transition hover:bg-white/[0.05] hover:text-zinc-200 active:scale-95"
+                      className="flex h-10 w-9 items-center justify-center rounded-xl text-zinc-500 transition hover:bg-white/5 hover:text-zinc-200 active:scale-95"
                       aria-label={`Opciones de ${workout.name}`}
                     >
                       <MoreHorizontal className="h-4 w-4" />
@@ -255,16 +255,16 @@ export function Home({
                     <button
                       type="button"
                       onClick={() => handlePlay(workout)}
-                      className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.1] bg-[#18181B] text-[#FAFAFA] transition hover:bg-[#FAFAFA] hover:text-[#09090B] active:scale-95"
+                      className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-[#18181B] text-[#FAFAFA] transition hover:bg-[#FAFAFA] hover:text-[#09090B] active:scale-95"
                       aria-label={`Iniciar ${workout.name}`}
                     >
-                      <Play className="h-4 w-4 translate-x-[1px] fill-current" />
+                      <Play className="h-4 w-4 translate-x-px fill-current" />
                     </button>
                   </div>
 
                   {isMenuOpen && (
                     <div
-                      className="absolute top-14 right-12 z-30 w-40 overflow-hidden rounded-2xl border border-white/[0.1] bg-[#18181B] py-1"
+                      className="absolute top-14 right-12 z-30 w-40 overflow-hidden rounded-2xl border border-white/10 bg-[#18181B] py-1"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <button
@@ -273,7 +273,7 @@ export function Home({
                           setOpenMenuId(null);
                           onEditWorkout(workout);
                         }}
-                        className="flex w-full items-center gap-2.5 px-3.5 py-2.5 text-xs font-medium text-zinc-200 hover:bg-white/[0.06]"
+                        className="flex w-full items-center gap-2.5 px-3.5 py-2.5 text-xs font-medium text-zinc-200 hover:bg-white/6"
                       >
                         <Edit3 className="h-3.5 w-3.5 text-zinc-400" />
                         Editar
@@ -284,7 +284,7 @@ export function Home({
                           setOpenMenuId(null);
                           onDuplicateWorkout(workout);
                         }}
-                        className="flex w-full items-center gap-2.5 px-3.5 py-2.5 text-xs font-medium text-zinc-200 hover:bg-white/[0.06]"
+                        className="flex w-full items-center gap-2.5 px-3.5 py-2.5 text-xs font-medium text-zinc-200 hover:bg-white/6"
                       >
                         <Copy className="h-3.5 w-3.5 text-zinc-400" />
                         Duplicar
